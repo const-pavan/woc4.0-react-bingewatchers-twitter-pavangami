@@ -1,25 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
-// import aaa from "../assets/jpg/aaa.jpg";
-import { getDocs, query, orderBy } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
-function CreateTweet({ setTweets, tweets }) {
+function CreateComment({ id }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    tweet: "",
-    imgUrl: "",
-    comments: [],
+    comment: "",
   });
 
   // eslint-disable-next-line no-unused-vars
-  const { name, tweet, imgUrl } = formData;
+  const { name, comment } = formData;
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -33,10 +29,10 @@ function CreateTweet({ setTweets, tweets }) {
             ...formData,
             userRef: user.uid,
             name: user.displayName,
-            imgUrl: user.photoURL,
+            id: uuidv4(),
           });
         } else {
-          navigate("/sign-in");
+          //navigate("/sign-in");
         }
       });
     }
@@ -54,41 +50,22 @@ function CreateTweet({ setTweets, tweets }) {
 
     const formDataCopy = {
       ...formData,
-      timestamp: serverTimestamp(),
     };
     try {
-      const docRef = await addDoc(collection(db, "tweets"), formDataCopy);
+      const docRef = doc(db, `/tweets/${id}`);
+      await updateDoc(docRef, {
+        comments: arrayUnion(formDataCopy),
+      });
+
       setLoading(false);
-      toast.success("Tweeted...");
+      toast.success("Comment is successful...");
 
       setFormData((prevState) => ({
         ...prevState,
-        tweet: "",
+        comment: "",
       }));
-      const fetchTweets = async () => {
-        try {
-          const tweetsRef = collection(db, "tweets"); //reference
-          //create query
-          const q = query(tweetsRef, orderBy("timestamp", "desc"));
-
-          const querySnap = await getDocs(q);
-
-          const tweets = [];
-
-          querySnap.forEach((doc) => {
-            return tweets.push({
-              id: doc.id,
-              data: doc.data(),
-            });
-          });
-          setTweets(tweets);
-          setLoading(false);
-        } catch (error) {
-          toast.error("Could not featch tweets");
-        }
-      };
-      fetchTweets();
     } catch (error) {
+      console.log(error);
       toast.error("Try again!!!");
     }
 
@@ -98,31 +75,28 @@ function CreateTweet({ setTweets, tweets }) {
   const onMutate = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      tweet: e.target.value,
+      comment: e.target.value,
     }));
   };
 
   if (loading) {
     return <Spinner />;
   }
-
   return (
     <main>
       <div>
         <ul>
           <div className="tweet-container">
-            <img src={imgUrl} alt="profile" className="img"></img>
-
             <div className="text-cotainer">
               <strong></strong>
             </div>
             <form onSubmit={onSubmit}>
-              <textarea
+              <input
                 className="aaaaa"
                 type="text"
-                id="address"
-                value={tweet}
+                id="comment"
                 placeholder="type some text"
+                value={comment}
                 onChange={onMutate}
                 required
               />
@@ -135,4 +109,4 @@ function CreateTweet({ setTweets, tweets }) {
   );
 }
 
-export default CreateTweet;
+export default CreateComment;

@@ -1,6 +1,6 @@
 import Tweets from "./Tweets";
 import CreateTweet from "./CreateTweet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 function Explore() {
   const [tweets, setTweets] = useState(null);
   return (

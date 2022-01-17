@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import { Link } from "react-router-dom";
 
 function Dialog(props) {
+  // const auth = getAuth();
+  // let imgUrl= null;
   const date = props.timestamp.toDate();
+  const id = props.id;
   const ndate =
     date.getDate() +
     "/" +
@@ -25,6 +29,10 @@ function Dialog(props) {
         <strong>{props.title}</strong>
         <p>{props.message}</p>
         <p>{ndate}</p>
+        <Link to={`/comments/${id}`}>
+          <img src={props.img} alt="comment" className="retweet"></img>
+          {<p>{props.comments.length}</p>}
+        </Link>
       </div>
     </div>
   );
@@ -38,13 +46,14 @@ function Tweets({ setTweets, tweets }) {
       try {
         const tweetsRef = collection(db, "tweets"); //reference
         //create query
-        const q = query(tweetsRef, orderBy("timestamp", "desc"), limit(10));
+        const q = query(tweetsRef, orderBy("timestamp", "desc"));
 
         const querySnap = await getDocs(q);
 
         const tweets = [];
 
         querySnap.forEach((doc) => {
+          //console.log(doc.data());
           return tweets.push({
             id: doc.id,
             data: doc.data(),
@@ -57,7 +66,7 @@ function Tweets({ setTweets, tweets }) {
       }
     };
     fetchTweets();
-  }, []);
+  });
   return (
     <main>
       <div>
@@ -69,10 +78,12 @@ function Tweets({ setTweets, tweets }) {
               {tweets.map((tweet) => (
                 <Dialog
                   key={tweet.id}
+                  id={tweet.id}
                   title={tweet.data.name}
                   message={tweet.data.tweet}
                   img={tweet.data.imgUrl}
                   timestamp={tweet.data.timestamp}
+                  comments={tweet.data.comments}
                 />
               ))}
             </ul>

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Comment from "./pages/Comment";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/comments/:id" element={<Comment />} />
           <Route path="/sign-up" element={<SingUp />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
         </Routes>

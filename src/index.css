@@ -844,6 +844,13 @@ img {
   margin-right: 24px;
   display: block;
 }
+.retweet {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin-right: 24px;
+  display: block;
+}
 
 .text-container {
   align-items: center;
