@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  limit,
-  startAfter,
-} from "firebase/firestore";
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
@@ -37,8 +30,7 @@ function Dialog(props) {
   );
 }
 
-function Tweets() {
-  const [tweets, setTweets] = useState(null);
+function Tweets({ setTweets, tweets }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -67,12 +59,12 @@ function Tweets() {
     fetchTweets();
   }, []);
   return (
-    <div className="category">
-      {loading ? (
-        <Spinner />
-      ) : tweets && tweets.length > 0 ? (
-        <>
-          <main>
+    <main>
+      <div>
+        {loading ? (
+          <Spinner />
+        ) : tweets && tweets.length > 0 ? (
+          <>
             <ul>
               {tweets.map((tweet) => (
                 <Dialog
@@ -84,12 +76,12 @@ function Tweets() {
                 />
               ))}
             </ul>
-          </main>
-        </>
-      ) : (
-        <p>No Tweets Yet</p>
-      )}
-    </div>
+          </>
+        ) : (
+          <p>No Tweets Yet</p>
+        )}
+      </div>
+    </main>
   );
 }
 

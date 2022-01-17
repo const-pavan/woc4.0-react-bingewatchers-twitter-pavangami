@@ -829,9 +829,12 @@ button {
   display: flex;
   align-items: center;
   padding: 12px;
-  margin-bottom: 25px;
-  margin-top: 2rem;
   margin: 12px;
+}
+
+.aaaaa {
+  width: auto;
+  padding: "9px";
 }
 
 img {
