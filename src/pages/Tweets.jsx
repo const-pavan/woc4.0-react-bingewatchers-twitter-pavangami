@@ -10,6 +10,7 @@ function Dialog(props) {
   // let imgUrl= null;
   const date = props.timestamp.toDate();
   const id = props.id;
+  const userID = props.useId;
   const ndate =
     date.getDate() +
     "/" +
@@ -26,7 +27,7 @@ function Dialog(props) {
     <div className="tweet-container">
       <img src={props.img} alt="profile" className="img"></img>
       <div className="text-cotainer">
-        <strong>{props.title}</strong>
+        <Link to={`/other/${userID}`}>{<strong>@{props.title}</strong>}</Link>
         <p>{props.message}</p>
         <p>{ndate}</p>
         <Link to={`/comments/${id}`}>
@@ -66,7 +67,7 @@ function Tweets({ setTweets, tweets }) {
       }
     };
     fetchTweets();
-  });
+  }, []);
   return (
     <main>
       <div>
@@ -84,6 +85,7 @@ function Tweets({ setTweets, tweets }) {
                   img={tweet.data.imgUrl}
                   timestamp={tweet.data.timestamp}
                   comments={tweet.data.comments}
+                  useId={tweet.data.userRef}
                 />
               ))}
             </ul>

@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Comment from "./pages/Comment";
+import Other from "./pages/Other";
+import PrivateRouteOther from "./components/PrivateRouteOther";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
           <Route path="/" element={<Explore />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/other/:id" element={<PrivateRouteOther />}>
+            <Route path="/other/:id" element={<Other />} />
           </Route>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/comments/:id" element={<Comment />} />

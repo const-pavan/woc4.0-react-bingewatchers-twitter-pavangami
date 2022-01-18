@@ -64,11 +64,11 @@ function CreateComment({ id }) {
         ...prevState,
         comment: "",
       }));
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       toast.error("Try again!!!");
     }
-
     navigate("/");
   };
 

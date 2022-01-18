@@ -20,7 +20,7 @@ function Comment() {
       }
     };
     fetchTweet("tweets", s);
-  });
+  }, []);
 
   return tweet ? (
     <main>
@@ -41,7 +41,6 @@ function Comment() {
               <br />
             </div>
           ))}
-        {console.log(tweet.comments[0])}
       </div>
     </main>
   ) : (

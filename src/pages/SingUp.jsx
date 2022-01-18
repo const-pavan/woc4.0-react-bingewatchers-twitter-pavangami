@@ -41,6 +41,7 @@ function SingUp() {
         password
       );
       const user = userCredential.user;
+      //console.log(auth.currentUser.uid);
       updateProfile(auth.currentUser, {
         displayName: name,
         photoURL: imgUrl,
@@ -49,6 +50,9 @@ function SingUp() {
       const formdatacopy = { ...formData };
       delete formdatacopy.password;
       formdatacopy.timestamp = serverTimestamp();
+      formdatacopy.uid = auth.currentUser.uid;
+      formdatacopy.following = [];
+      formdatacopy.followers = [];
 
       await setDoc(doc(db, "users", user.uid), formdatacopy);
 

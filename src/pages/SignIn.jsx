@@ -26,6 +26,7 @@ function SignIn() {
 
     try {
       const auth = getAuth();
+
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,

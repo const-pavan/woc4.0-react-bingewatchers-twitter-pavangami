@@ -1,0 +1,113 @@
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase.config";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
+function Other() {
+  const params = useParams();
+  const uid = params.id;
+  const [user, setUser] = useState(null);
+
+  const [following, setFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
+
+  useEffect(() => {
+    const fetchUser = async (coll, id) => {
+      try {
+        const snap = await getDoc(doc(db, coll, id));
+        //console.log(snap.data());
+        setFollowerCount(snap.data().followers.length);
+        setFollowingCount(snap.data().following.length);
+        setUser(snap.data());
+      } catch (error) {
+        toast.error("Could not featch comments..");
+      }
+    };
+    fetchUser("users", uid);
+    const auth = getAuth();
+    const fetchFollow = async (coll, id) => {
+      try {
+        //create query
+        const snap = await getDoc(doc(db, coll, id));
+        if (snap.data().followers.includes(auth.currentUser.uid)) {
+          setFollowing(true);
+        } else {
+          setFollowing(false);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Could not featch user");
+      }
+    };
+    fetchFollow("users", uid);
+  }, [following]);
+
+  const onFollowClick = async () => {
+    if (!following) {
+      try {
+        const auth = getAuth();
+        const docRef = doc(db, `/users/${uid}`);
+        await updateDoc(docRef, {
+          followers: arrayUnion(auth.currentUser.uid),
+        });
+        const docRef2 = doc(db, `/users/${auth.currentUser.uid}`);
+        await updateDoc(docRef2, {
+          following: arrayUnion(uid),
+        });
+        toast.success("Follow is successful...");
+        //setFollowerCount(docRef.data().followers.length);
+        setFollowing(true);
+      } catch (error) {
+        console.log(error);
+        toast.error("Try again!!!");
+      }
+    } else {
+      try {
+        const auth = getAuth();
+        const docRef = doc(db, `/users/${uid}`);
+        await updateDoc(docRef, {
+          followers: arrayRemove(auth.currentUser.uid),
+        });
+        const docRef2 = doc(db, `/users/${auth.currentUser.uid}`);
+        await updateDoc(docRef2, {
+          following: arrayRemove(uid),
+        });
+        toast.success("Unfollow is successful...");
+        //console.log(docRef.data().followers);
+        //setFollowerCount(docRef.data().followers.length);
+        setFollowing(false);
+      } catch (error) {
+        console.log(error);
+        toast.error("Try again!!!");
+      }
+    }
+  };
+  return user ? (
+    <main>
+      <div className="tweet-container">
+        <img src={user.imgUrl} alt="profile" className="img"></img>
+        <div className="text-cotainer">
+          <strong>{user.name}</strong>
+          <p>{user.tweet}</p>
+        </div>
+        <button onClick={onFollowClick}>
+          {following ? "Following" : "Follow"}
+        </button>
+      </div>
+      <div>
+        <br />
+        <p>followers {followerCount}</p>
+        <br />
+        <p>following {followingCount}</p>
+      </div>
+    </main>
+  ) : (
+    <div>Loading...</div>
+  );
+}
+
+export default Other;
