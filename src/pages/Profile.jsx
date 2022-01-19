@@ -13,19 +13,21 @@ import {
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Tweets from "./Tweets";
+import UserProfile from "./UserProfile";
+import Spinner from "../components/Spinner";
 
 function Profile() {
   const auth = getAuth();
-  const [followerCount, setFollowerCount] = useState(0);
-  const [followingCount, setFollowingCount] = useState(0);
+  const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchUser = async (coll, id) => {
       try {
         const snap = await getDoc(doc(db, coll, id));
         //console.log(snap.data());
-        setFollowerCount(snap.data().followers.length);
-        setFollowingCount(snap.data().following.length);
+        setUser(snap.data());
       } catch (error) {
         toast.error("Could not featch data..");
       }
@@ -54,13 +56,13 @@ function Profile() {
         });
 
         setTweets(tweets);
-        //setLoading(false);
+        setLoading(false);
       } catch (error) {
         toast.error("Could not featch tweets");
       }
     };
     fetchTweets();
-  }, []);
+  }, [auth.currentUser.uid]);
 
   const [changeDetails, setChangeDetails] = useState(false);
   const [formData, setFormData] = useState({
@@ -100,7 +102,7 @@ function Profile() {
     }));
   };
 
-  return (
+  return user ? (
     <div className="profile">
       <header className="profileHeader">
         <p className="pageHeader">My Profile</p>
@@ -109,6 +111,15 @@ function Profile() {
         </button>
       </header>
       <main>
+        <UserProfile
+          imgUrl={user.imgUrl}
+          name={user.name}
+          following={null}
+          isOwn={false}
+          followingCount={user.followers.length}
+          followerCount={user.following.length}
+        />
+
         <div className="profileDetailsHeader">
           <p className="profileDetailsText">Personal Details</p>
           <p
@@ -133,15 +144,12 @@ function Profile() {
             />
           </form>
         </div>
-        <div>
-          <br />
-          <p>followers {followerCount}</p>
-          <br />
-          <p>following {followingCount}</p>
-        </div>
-        <Tweets setTweets={setTweets} tweets={tweets} />
+
+        <Tweets setTweets={setTweets} tweets={tweets} loading={loading} />
       </main>
     </div>
+  ) : (
+    <Spinner />
   );
 }
 

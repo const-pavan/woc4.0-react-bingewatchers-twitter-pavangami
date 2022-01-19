@@ -20,7 +20,7 @@ function Comment() {
       }
     };
     fetchTweet("tweets", s);
-  }, []);
+  }, [s]);
 
   return tweet ? (
     <main>

@@ -144,6 +144,7 @@ function Other() {
           following={following}
           followingCount={followingCount}
           followerCount={followerCount}
+          isOwn={true}
         />
         <Tweets setTweets={setTweets} tweets={tweets} />
       </main>

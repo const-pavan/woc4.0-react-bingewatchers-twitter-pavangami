@@ -5,12 +5,13 @@ function UserProfile({
   following,
   followingCount,
   followerCount,
+  isOwn,
 }) {
   return (
-    <div>
+    <div className="p-margin">
       <div className="p-container">
         <div>
-          <div className="commentime-container">
+          <div className="time-container">
             <img src={imgUrl} alt="profile" className="profile-icon"></img>
 
             <div className="col-container">
@@ -18,9 +19,11 @@ function UserProfile({
                 <h1 className="profileaa-user-name">{name}</h1>
                 <div className="count2"></div>
                 <div className="count2"></div>
-                <button onClick={onFollowClick} className="follow">
-                  {following ? "Following" : "Follow"}
-                </button>
+                {isOwn && (
+                  <button onClick={onFollowClick} className="follow">
+                    {following ? "Following" : "Follow"}
+                  </button>
+                )}
               </div>
 
               <div className="name-container">
@@ -35,6 +38,8 @@ function UserProfile({
                   <span className="navbarListItems">{followingCount}</span>{" "}
                 </strong>
               </div>
+              <div className="count2"></div>
+              <div className="count2"></div>
             </div>
           </div>
         </div>

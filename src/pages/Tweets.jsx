@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../firebase.config";
-import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import comment from "../assets/jpg/comment.jpg";
@@ -47,35 +43,7 @@ function Dialog(props) {
   );
 }
 
-function Tweets({ setTweets, tweets }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTweets = async () => {
-      try {
-        const tweetsRef = collection(db, "tweets"); //reference
-        //create query
-        const q = query(tweetsRef, orderBy("timestamp", "desc"));
-
-        const querySnap = await getDocs(q);
-
-        const tweets = [];
-
-        querySnap.forEach((doc) => {
-          //console.log(doc.data());
-          return tweets.push({
-            id: doc.id,
-            data: doc.data(),
-          });
-        });
-        setTweets(tweets);
-        setLoading(false);
-      } catch (error) {
-        toast.error("Could not featch tweets");
-      }
-    };
-    fetchTweets();
-  }, []);
+function Tweets({ setTweets, tweets, loading }) {
   return (
     <div>
       {loading ? (
