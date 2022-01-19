@@ -1,10 +1,22 @@
-import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import Tweets from "./Tweets";
+import Spinner from "../components/Spinner";
+import UserProfile from "./UserProfile";
 
 function Other() {
   const params = useParams();
@@ -14,6 +26,8 @@ function Other() {
   const [following, setFollowing] = useState(false);
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
+  const [tweets, setTweets] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async (coll, id) => {
@@ -44,7 +58,36 @@ function Other() {
       }
     };
     fetchFollow("users", uid);
-  }, [following]);
+
+    const fetchTweets = async () => {
+      try {
+        setTweets(null);
+        const tweetsRef = collection(db, "tweets"); //reference
+        //create query
+        const q = query(tweetsRef, orderBy("timestamp", "desc"));
+
+        const querySnap = await getDocs(q);
+
+        const tweets = [];
+
+        querySnap.forEach((doc) => {
+          //console.log(doc.data().userRef);
+          //console.log(auth.currentUser.uid);
+          if (doc.data().userRef === uid)
+            return tweets.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          else return tweets;
+        });
+        setTweets(tweets);
+        setLoading(false);
+      } catch (error) {
+        toast.error("Could not featch tweets");
+      }
+    };
+    fetchTweets();
+  }, [following, uid]);
 
   const onFollowClick = async () => {
     if (!following) {
@@ -86,25 +129,25 @@ function Other() {
       }
     }
   };
-  return user ? (
-    <main>
-      <div className="tweet-container">
-        <img src={user.imgUrl} alt="profile" className="img"></img>
-        <div className="text-cotainer">
-          <strong>{user.name}</strong>
-          <p>{user.tweet}</p>
-        </div>
-        <button onClick={onFollowClick}>
-          {following ? "Following" : "Follow"}
-        </button>
-      </div>
-      <div>
-        <br />
-        <p>followers {followerCount}</p>
-        <br />
-        <p>following {followingCount}</p>
-      </div>
-    </main>
+  return loading ? (
+    <Spinner />
+  ) : user ? (
+    <>
+      <header>
+        <h1>User Profile</h1>
+      </header>
+      <main>
+        <UserProfile
+          imgUrl={user.imgUrl}
+          onFollowClick={onFollowClick}
+          name={user.name}
+          following={following}
+          followingCount={followingCount}
+          followerCount={followerCount}
+        />
+        <Tweets setTweets={setTweets} tweets={tweets} />
+      </main>
+    </>
   ) : (
     <div>Loading...</div>
   );

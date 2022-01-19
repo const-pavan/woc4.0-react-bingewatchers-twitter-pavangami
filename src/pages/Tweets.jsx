@@ -4,7 +4,7 @@ import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
-
+import comment from "../assets/jpg/comment.jpg";
 function Dialog(props) {
   // const auth = getAuth();
   // let imgUrl= null;
@@ -26,14 +26,22 @@ function Dialog(props) {
   return (
     <div className="tweet-container">
       <img src={props.img} alt="profile" className="img"></img>
-      <div className="text-cotainer">
-        <Link to={`/other/${userID}`}>{<strong>@{props.title}</strong>}</Link>
-        <p>{props.message}</p>
-        <p>{ndate}</p>
-        <Link to={`/comments/${id}`}>
-          <img src={props.img} alt="comment" className="retweet"></img>
-          {<p>{props.comments.length}</p>}
-        </Link>
+      <div className="tt-container">
+        <div className="text-cotainer">
+          <Link to={`/other/${userID}`}>{<strong>@{props.title}</strong>}</Link>
+          <p>{props.message}</p>
+          <p>{ndate}</p>
+        </div>
+
+        <div className="commentime-container">
+          <Link to={`/comments/${id}`}>
+            <div className="navbarListItems">
+              <img src={comment} alt="comment" className="comment-icon"></img>
+              <div className="count"></div>
+              {props.comments.length}
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -69,32 +77,30 @@ function Tweets({ setTweets, tweets }) {
     fetchTweets();
   }, []);
   return (
-    <main>
-      <div>
-        {loading ? (
-          <Spinner />
-        ) : tweets && tweets.length > 0 ? (
-          <>
-            <ul>
-              {tweets.map((tweet) => (
-                <Dialog
-                  key={tweet.id}
-                  id={tweet.id}
-                  title={tweet.data.name}
-                  message={tweet.data.tweet}
-                  img={tweet.data.imgUrl}
-                  timestamp={tweet.data.timestamp}
-                  comments={tweet.data.comments}
-                  useId={tweet.data.userRef}
-                />
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p>No Tweets Yet</p>
-        )}
-      </div>
-    </main>
+    <div>
+      {loading ? (
+        <Spinner />
+      ) : tweets && tweets.length > 0 ? (
+        <>
+          <div>
+            {tweets.map((tweet) => (
+              <Dialog
+                key={tweet.id}
+                id={tweet.id}
+                title={tweet.data.name}
+                message={tweet.data.tweet}
+                img={tweet.data.imgUrl}
+                timestamp={tweet.data.timestamp}
+                comments={tweet.data.comments}
+                useId={tweet.data.userRef}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>No Tweets Yet</p>
+      )}
+    </div>
   );
 }
 

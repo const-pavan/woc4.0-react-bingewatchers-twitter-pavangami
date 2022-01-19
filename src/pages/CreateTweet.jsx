@@ -107,31 +107,27 @@ function CreateTweet({ setTweets, tweets }) {
   }
 
   return (
-    <main>
-      <div>
-        <ul>
-          <div className="tweet-container">
-            <img src={imgUrl} alt="profile" className="img"></img>
+    <>
+      <div className="tweet-container">
+        <img src={imgUrl} alt="profile" className="img"></img>
 
-            <div className="text-cotainer">
-              <strong></strong>
-            </div>
-            <form onSubmit={onSubmit}>
-              <textarea
-                className="aaaaa"
-                type="text"
-                id="address"
-                value={tweet}
-                placeholder="type some text"
-                onChange={onMutate}
-                required
-              />
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
-        </ul>
+        <div className="text-cotainer">
+          <strong></strong>
+        </div>
+        <form onSubmit={onSubmit}>
+          <textarea
+            className="textarea"
+            type="text"
+            id="address"
+            value={tweet}
+            placeholder="type your tweet..."
+            onChange={onMutate}
+            required
+          />
+          <input type="submit" value="Tweet" className="tweet" />
+        </form>
       </div>
-    </main>
+    </>
   );
 }
 

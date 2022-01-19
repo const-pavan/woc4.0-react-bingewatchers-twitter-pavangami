@@ -28,8 +28,7 @@ button {
 .input,
 .passwordInput,
 .emailInput,
-.nameInput,
-.textarea {
+.nameInput {
   box-shadow: rgba(0, 0, 0, 0.11);
   border: none;
   background: #ffffff;
@@ -45,16 +44,57 @@ button {
   .input,
   .passwordInput,
   .emailInput,
-  .nameInput,
-  .textarea {
-    padding: 0 5rem;
+  .nameInput {
+    padding: 5px 5rem;
   }
 }
-
+input[type="submit"] {
+  all: unset;
+  margin-left: 10px;
+  background-color: rgb(62, 87, 197);
+  border-radius: 2px;
+  border: none;
+  font-size: 20px;
+  border-radius: 5px;
+  /* padding: 5px, 5px; */
+}
+.follow {
+  all: unset;
+  margin-left: 10px;
+  background-color: rgb(62, 87, 197);
+  border-radius: 2px;
+  border: none;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 5px;
+}
 .textarea {
-  padding: 1rem 1.5rem;
-  height: 300px;
-  border-radius: 1rem;
+  all: unset;
+  width: 50vw;
+  height: auto;
+  min-height: auto;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  line-height: 1.5;
+  box-shadow: 1px 1px 1px #999;
+  padding: 10px 10px;
+}
+
+.namecomment {
+  all: unset;
+  width: 50vw;
+  height: auto;
+  min-height: auto;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+}
+.tweet {
+  padding: 10px, 10px;
 }
 
 .primaryButton {
@@ -827,31 +867,86 @@ button {
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(50, 120, 80, 0.2);
   display: flex;
-  align-items: center;
-  padding: 12px;
-  margin: 12px;
+  padding: 10px;
+  margin: 10px;
 }
-
-.aaaaa {
-  width: auto;
-  padding: "9px";
+.tt-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
-
-img {
-  border-radius: 50%;
-  height: 80px;
-  width: 80px;
-  margin-right: 24px;
-  display: block;
-}
-.retweet {
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  margin-right: 24px;
-  display: block;
-}
-
 .text-container {
+  width: 90%;
+  display: flex;
+}
+.comment-icon {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  display: block;
+}
+.profile-icon {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: block;
+}
+.commentime-container {
+  width: auto;
+  display: flex;
+  margin: 5px;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+.count {
+  padding: 3px;
+}
+.count2 {
+  padding: 5px;
+}
+.img {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  margin-right: 24px;
+  display: block;
+}
+.comment-container {
+  width: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(50, 120, 80, 0.2);
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 10px;
+}
+/* Profile Section */
+.p-container {
+  width: auto;
+  height: auto;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(50, 120, 80, 0.2);
+  background: white;
+}
+.name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.col-container {
+  display: flex;
+  margin-left: 15px;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.profileaa-user-name {
+  display: inline-block;
+  font-size: 2.2rem;
+  font-weight: 300;
 }

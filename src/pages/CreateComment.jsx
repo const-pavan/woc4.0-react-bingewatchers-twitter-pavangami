@@ -85,25 +85,23 @@ function CreateComment({ id }) {
   return (
     <main>
       <div>
-        <ul>
-          <div className="tweet-container">
-            <div className="text-cotainer">
-              <strong></strong>
-            </div>
-            <form onSubmit={onSubmit}>
-              <input
-                className="aaaaa"
-                type="text"
-                id="comment"
-                placeholder="type some text"
-                value={comment}
-                onChange={onMutate}
-                required
-              />
-              <input type="submit" value="Submit" />
-            </form>
+        <div className="tweet-container">
+          <div className="text-cotainer">
+            <strong></strong>
           </div>
-        </ul>
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              className="namecomment"
+              id="comment"
+              placeholder="Type your comment...."
+              value={comment}
+              onChange={onMutate}
+              required
+            />
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     </main>
   );
