@@ -57,6 +57,7 @@ function CreateTweet({ setTweets, tweets }) {
       timestamp: serverTimestamp(),
     };
     try {
+      // eslint-disable-next-line
       const docRef = await addDoc(collection(db, "tweets"), formDataCopy);
       setLoading(false);
       toast.success("Tweeted...");

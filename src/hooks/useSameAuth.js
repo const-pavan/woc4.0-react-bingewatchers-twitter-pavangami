@@ -23,7 +23,7 @@ export const useSameStatus = () => {
     return () => {
       isMounted.current = false;
     };
-  }, [isMounted]);
+  }, [isMounted, uid]);
 
   return { loggedIn, checkingStatus };
 };
