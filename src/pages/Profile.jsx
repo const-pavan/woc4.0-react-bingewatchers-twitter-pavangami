@@ -15,12 +15,20 @@ import { toast } from "react-toastify";
 import Tweets from "./Tweets";
 import UserProfile from "./UserProfile";
 import Spinner from "../components/Spinner";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 
 function Profile() {
   const auth = getAuth();
   const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [dp, setdp] = useState(null);
 
   useEffect(() => {
     const fetchUser = async (coll, id) => {
@@ -102,6 +110,90 @@ function Profile() {
     }));
   };
 
+  const onMutate = (e) => {
+    if (e.target.files) {
+      console.log(e.target.files);
+      setdp(e.target.files);
+    }
+  };
+  let imgUrl;
+  const onSubmitt = async (e) => {
+    e.preventDefault();
+    if (dp) {
+      setLoading(true);
+      // Store image in firebase
+      const storeImage = async (image) => {
+        return new Promise((resolve, reject) => {
+          const storage = getStorage();
+          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+
+          const storageRef = ref(storage, "images/" + fileName);
+
+          const uploadTask = uploadBytesResumable(storageRef, image);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log("Upload is " + progress + "% done");
+              switch (snapshot.state) {
+                case "paused":
+                  console.log("Upload is paused");
+                  break;
+                case "running":
+                  console.log("Upload is running");
+                  break;
+                default:
+                  break;
+              }
+            },
+            (error) => {
+              reject(error);
+            },
+            () => {
+              // Handle successful uploads on complete
+              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                imgUrl = downloadURL;
+                //console.log("File available at", downloadURL);
+                resolve(downloadURL);
+              });
+            }
+          );
+        });
+      };
+
+      // eslint-disable-next-line no-unused-vars
+      const imgUrls = await Promise.all(
+        [...dp].map((image) => storeImage(image))
+      ).catch(() => {
+        setLoading(false);
+        toast.error("Images not uploaded");
+        return;
+      });
+      //console.log("File available at", imgUrls);
+      try {
+        //update in db
+        await updateProfile(auth.currentUser, {
+          photoURL: imgUrl,
+        });
+        //console.log(auth.currentUser);
+        //update in firestore
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+          imgUrl: imgUrl,
+        });
+      } catch (error) {
+        console.log(error);
+        toast.error("Could not update, Try again..!");
+      }
+      setLoading(false);
+    } else {
+      toast.error("Image not seleted..");
+    }
+  };
+
   return user ? (
     <div className="profile">
       <header className="profileHeader">
@@ -116,8 +208,8 @@ function Profile() {
           name={user.name}
           following={null}
           isOwn={false}
-          followingCount={user.followers.length}
-          followerCount={user.following.length}
+          followingCount={user.following.length}
+          followerCount={user.followers.length}
         />
 
         <div className="profileDetailsHeader">
@@ -142,6 +234,23 @@ function Profile() {
               value={name}
               onChange={onChange}
             />
+          </form>
+        </div>
+        <label className="formLabel">Profile Image</label>
+        <div className="name-container">
+          <form>
+            <input
+              className="formInputFile"
+              type="file"
+              id="images"
+              max="1"
+              accept=".jpg,.png,.jpeg"
+              onChange={onMutate}
+              required
+            />
+            <button type="submit" className="logOut" onClick={onSubmitt}>
+              Update Profile
+            </button>
           </form>
         </div>
 

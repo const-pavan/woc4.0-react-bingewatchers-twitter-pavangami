@@ -17,9 +17,7 @@ function CreateTweet({ setTweets, tweets }) {
     imgUrl: "",
     comments: [],
   });
-
-  // eslint-disable-next-line no-unused-vars
-  const { name, tweet, imgUrl } = formData;
+  const { tweet, imgUrl } = formData;
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -40,12 +38,11 @@ function CreateTweet({ setTweets, tweets }) {
         }
       });
     }
-
     return () => {
       isMounted.current = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMounted]);
+  }, [auth, isMounted, navigate]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

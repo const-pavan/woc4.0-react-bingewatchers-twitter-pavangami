@@ -843,10 +843,6 @@ input[type="submit"] {
   margin-right: 1rem;
 }
 
-.createListingButton {
-  margin-top: 5rem;
-}
-
 .offers {
   margin-bottom: 10rem;
 }
@@ -959,4 +955,31 @@ input[type="submit"] {
 }
 .p-margin {
   padding: 20px;
+}
+.formfile {
+  padding: 0.9rem 3rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
+  display: flex;
+}
+.profileimage-container {
+  width: 100%;
+  display: flex;
+  margin: 5px;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.logOut {
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #00cc66;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
 }

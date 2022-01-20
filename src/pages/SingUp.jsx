@@ -18,7 +18,7 @@ function SingUp() {
     email: "",
     password: "",
     imgUrl:
-      "https://images.unsplash.com/photo-1641945511908-4a2ef922b2a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80",
+      "https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
   });
   const { name, email, password, imgUrl } = formData;
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ function SingUp() {
 
       await setDoc(doc(db, "users", user.uid), formdatacopy);
 
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       toast.error("Something is Wrong!!!");
     }

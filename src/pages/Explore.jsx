@@ -1,12 +1,13 @@
 import Tweets from "./Tweets";
 import CreateTweet from "./CreateTweet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 function Explore() {
   const [tweets, setTweets] = useState(null);
   const [loading, setLoading] = useState(true);
+  const isMounted = useRef(true);
 
   useEffect(() => {
     const fetchTweets = async () => {
@@ -32,8 +33,12 @@ function Explore() {
         toast.error("Could not featch tweets");
       }
     };
+
     fetchTweets();
-  }, []);
+    return () => {
+      isMounted.current = false;
+    };
+  }, [isMounted]);
   return (
     <div className="explore">
       <header>
