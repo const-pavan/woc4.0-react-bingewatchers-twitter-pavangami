@@ -8,46 +8,21 @@ html::-webkit-scrollbar {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
-  background-color: #f2f4f8;
-  margin: 0;
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: sans-serif;
+  /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
+  background: #e1eec3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #f05053,
+    #e1eec3
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f05053, #e1eec3);
 }
 
-a {
-  text-decoration: none;
-  display: block;
-  color: #000000;
-}
-
-button {
-  outline: none;
-  border: none;
-}
-
-.input,
-.passwordInput,
-.emailInput,
-.nameInput {
-  box-shadow: rgba(0, 0, 0, 0.11);
-  border: none;
-  background: #ffffff;
-  border-radius: 3rem;
-  height: 3rem;
-  width: 100%;
-  outline: none;
-  font-family: "Montserrat", sans-serif;
-  padding: 0 3rem;
-  font-size: 1rem;
-}
-@media (min-width: 1100px) {
-  .input,
-  .passwordInput,
-  .emailInput,
-  .nameInput {
-    padding: 5px 5rem;
-  }
-}
 input[type="submit"] {
   all: unset;
   margin-left: 10px;
@@ -127,19 +102,15 @@ input[type="submit"] {
 }
 
 .pageContainer,
-.offers,
 .profile,
 .listingDetails,
-.category,
 .explore {
   margin: 1rem;
 }
 @media (min-width: 1024px) {
   .pageContainer,
-  .offers,
   .profile,
   .listingDetails,
-  .category,
   .explore {
     margin: 3rem;
   }
@@ -186,7 +157,14 @@ input[type="submit"] {
   bottom: 0;
   right: 0;
   height: 85px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background: #e1eec3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #f05053,
+    #e1eec3
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f05053, #e1eec3);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -225,108 +203,8 @@ input[type="submit"] {
   color: #2c2c2c;
 }
 
-.nameInput {
-  margin-bottom: 2rem;
-  /* background: url("./assets/svg/badgeIcon.svg") #ffffff 2.5% center no-repeat; */
-}
-
-.emailInput {
-  margin-bottom: 2rem;
-  /* background: url("./assets/svg/personIcon.svg") #ffffff 2.5% center no-repeat; */
-}
-
 .passwordInputDiv {
   position: relative;
-}
-
-.passwordInput {
-  margin-bottom: 2rem;
-  /* background: url("./assets/svg/lockIcon.svg") #ffffff 2.5% center no-repeat; */
-}
-
-.showPassword {
-  cursor: pointer;
-  position: absolute;
-  top: -4%;
-  right: 1%;
-  padding: 1rem;
-}
-
-.forgotPasswordLink {
-  cursor: pointer;
-  color: #00cc66;
-  font-weight: 600;
-  text-align: right;
-}
-
-.signInBar,
-.signUpBar {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: inherit;
-}
-
-.signInButton,
-.signUpButton,
-.signInText,
-.signUpText {
-  cursor: pointer;
-}
-@media (min-width: 1024px) {
-  .signInBar,
-  .signUpBar {
-    justify-content: start;
-  }
-}
-
-.signInText,
-.signUpText {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.signInButton,
-.signUpButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: #00cc66;
-  border-radius: 50%;
-}
-@media (min-width: 1024px) {
-  .signInButton,
-  .signUpButton {
-    margin-left: 3rem;
-  }
-}
-
-.socialLogin {
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.socialIconDiv {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.75rem;
-  margin: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  background-color: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-}
-
-.socialIconImg {
-  width: 100%;
 }
 
 .registerLink {
@@ -357,60 +235,6 @@ input[type="submit"] {
   margin-top: 3rem;
 }
 
-.swiper-container {
-  min-height: 225px;
-  height: 23vw;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: #ffffff !important;
-}
-
-.swiperSlideDiv {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.swiperSlideImg {
-  width: 100%;
-  object-fit: cover;
-}
-
-.swiperSlideText {
-  color: #ffffff;
-  position: absolute;
-  top: 70px;
-  left: 0;
-  font-weight: 600;
-  max-width: 90%;
-  font-size: 1.25rem;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
-}
-@media (min-width: 1024px) {
-  .swiperSlideText {
-    font-size: 1.75rem;
-  }
-}
-
-.swiperSlidePrice {
-  color: #000000;
-  position: absolute;
-  top: 143px;
-  left: 11px;
-  font-weight: 600;
-  max-width: 90%;
-  background-color: #ffffff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 1rem;
-}
-@media (min-width: 1024px) {
-  .swiperSlidePrice {
-    font-size: 1.25rem;
-  }
-}
-
 .exploreCategories {
   display: flex;
   justify-content: space-between;
@@ -433,231 +257,18 @@ input[type="submit"] {
   text-align: left;
 }
 
-.category {
-  margin-bottom: 10rem;
-}
-
-.categoryListings {
-  padding: 0;
-}
-
-.categoryListing {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.categoryListingLink {
-  display: contents;
-}
-
-.categoryListingImg {
-  width: 30%;
-  height: 100px;
-  border-radius: 1.5rem;
-  object-fit: cover;
-}
-@media (min-width: 1024px) {
-  .categoryListingImg {
-    width: 19%;
-    height: 217px;
-  }
-}
-
-.categoryListingDetails {
-  width: 65%;
-}
-@media (min-width: 1024px) {
-  .categoryListingDetails {
-    width: 79%;
-  }
-}
-
-.categoryListingLocation {
-  font-weight: 600;
-  font-size: 0.7rem;
-  opacity: 0.8;
-  margin-bottom: 0;
-}
-
-.categoryListingName {
-  font-weight: 600;
-  font-size: 1.25rem;
-  margin: 0;
-}
-
-.categoryListingPrice {
-  margin-top: 0.5rem;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #00cc66;
-  margin-bottom: 0;
-  display: flex;
-  align-items: center;
-}
-
-.categoryListingInfoDiv {
-  display: flex;
-  justify-content: space-between;
-  max-width: 275px;
-}
-
-.categoryListingInfoText {
-  font-weight: 500;
-  font-size: 0.7rem;
-}
-
-.loadMore {
-  cursor: pointer;
-  width: 8rem;
-  margin: 0 auto;
-  text-align: center;
-  padding: 0.25rem 0.5rem;
-  background-color: #000000;
-  color: #ffffff;
-  font-weight: 600;
-  border-radius: 1rem;
-  opacity: 0.7;
-  margin-top: 2rem;
-}
-
-.listingDetails {
-  margin-bottom: 10rem;
-}
-
-.shareIconDiv {
-  cursor: pointer;
-  position: fixed;
-  top: 3%;
-  right: 5%;
-  z-index: 2;
-  background-color: #ffffff;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.listingName {
-  font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.listingLocation {
-  margin-top: 0;
-  font-weight: 600;
-}
-
-.discountPrice {
-  padding: 0.25rem 0.5rem;
-  background-color: #000000;
-  color: #ffffff;
-  border-radius: 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  display: inline;
-}
-
-.listingType {
-  padding: 0.25rem 0.5rem;
-  background-color: #00cc66;
-  color: #ffffff;
-  border-radius: 2rem;
-  display: inline;
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin-right: 1rem;
-}
-
-.listingDetailsList {
-  padding: 0;
-  list-style-type: none;
-}
-.listingDetailsList li {
-  margin: 0.3rem 0;
-  font-weight: 500;
-  opacity: 0.8;
-}
-
-.listingLocationTitle {
-  margin-top: 2rem;
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.leafletContainer {
-  width: 100%;
-  height: 200px;
-  overflow-x: hidden;
-  margin-bottom: 3rem;
-}
-@media (min-width: 1024px) {
-  .leafletContainer {
-    height: 400px;
-  }
-}
-
-.linkCopied {
-  position: fixed;
-  top: 9%;
-  right: 5%;
-  z-index: 2;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-}
-
-.contactListingName {
-  margin-top: -1rem;
-  margin-bottom: 0;
-  font-weight: 600;
-}
-
-.contactListingLocation {
-  margin-top: 0.25rem;
-  font-weight: 600;
-}
-
-.contactLandlord {
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.landlordName {
-  font-weight: 600;
-  font-size: 1.2rem;
-}
-
-.messageForm {
-  margin-top: 0.5rem;
-}
-
-.messageDiv {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 4rem;
-}
-
-.messageLabel {
-  margin-bottom: 0.5rem;
-}
-
 .profile {
+  width: 70vw;
+  margin-bottom: 1rem;
+}
+.marginB {
   margin-bottom: 10rem;
 }
-
 .profileHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: auto;
 }
 
 .logOut {
@@ -667,24 +278,28 @@ input[type="submit"] {
   font-weight: 600;
   color: #ffffff;
   background-color: #00cc66;
-  padding: 0.25rem 0.75rem;
+  width: 15rem;
   border-radius: 1rem;
 }
 
 .profileDetailsHeader {
   display: flex;
   justify-content: space-between;
-  max-width: 500px;
+  width: auto;
+  align-items: center;
 }
 
 .personalDetailsText {
   font-weight: 600;
+  font-size: x-large;
+  color: #6d44b8;
 }
 
 .changePersonalDetails {
   cursor: pointer;
   font-weight: 600;
-  color: #00cc66;
+  font-size: x-large;
+  color: #6d44b8;
 }
 
 .profileCard {
@@ -692,7 +307,7 @@ input[type="submit"] {
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  width: auto;
 }
 
 .profileDetails {
@@ -727,28 +342,6 @@ input[type="submit"] {
 
 .profileAddressActive {
   background-color: rgba(44, 44, 44, 0.1);
-}
-
-.createListing {
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 0.25rem 1rem;
-  box-shadow: rgba(0, 0, 0, 0.2);
-  margin-top: 2rem;
-  font-weight: 600;
-  max-width: 500px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.listingText {
-  margin-top: 3rem;
-  font-weight: 600;
-}
-
-.lisitingsList {
-  padding: 0;
 }
 
 .formLabel {
@@ -809,29 +402,9 @@ input[type="submit"] {
   max-width: 326px;
 }
 
-.formInputAddress {
-  padding: 0.9rem 1rem;
-  width: 90%;
-  max-width: 326px;
-}
-
-.formPriceDiv {
-  display: flex;
-  align-items: center;
-}
-
-.formPriceText {
-  margin-left: -1.5rem;
-  font-weight: 600;
-}
-
-.imagesInfo {
-  font-size: 0.9rem;
-  opacity: 0.75;
-}
-
 .formInputFile {
-  width: 100%;
+  width: 70vw;
+  height: auto;
 }
 .formInputFile::-webkit-file-upload-button {
   background-color: #00cc66;
@@ -841,24 +414,6 @@ input[type="submit"] {
   padding: 0.5rem 0.75rem;
   border-radius: 1rem;
   margin-right: 1rem;
-}
-
-.createListingButton {
-  margin-top: 5rem;
-}
-
-.offers {
-  margin-bottom: 10rem;
-}
-
-.offerBadge {
-  padding: 0.25rem 0.5rem;
-  background-color: #000000;
-  color: #ffffff;
-  border-radius: 1rem;
-  margin-left: 1rem;
-  font-size: 0.8rem;
-  opacity: 0.75;
 }
 
 .tweet-container {
@@ -959,4 +514,208 @@ input[type="submit"] {
 }
 .p-margin {
   padding: 20px;
+}
+.formfile {
+  padding: 0.9rem 3rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
+  display: flex;
+}
+.profileimage-container {
+  width: 100%;
+  display: flex;
+  margin: 5px;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.logOut {
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #00cc66;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+}
+/*login */
+
+.main {
+  width: 350px;
+  height: 500px;
+  /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
+  background: #ecb016; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f05053,
+    #ecb016
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f05053,
+    #ecb016
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #000;
+}
+#chk {
+  display: none;
+}
+.singup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+label {
+  color: #fff;
+  font-size: 2.3em;
+  justify-content: center;
+  display: flex;
+  margin: 60px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+input {
+  width: 60%;
+  height: 20px;
+  background: #e0dede;
+  justify-content: center;
+  display: flex;
+  margin: 20px auto;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+button {
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: #573b8a;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+button:hover {
+  background: #6d44b8;
+}
+.forgotPasswordLink {
+  cursor: pointer;
+  color: #6d44b8;
+  font-weight: 600;
+  text-align: center;
+}
+.login {
+  height: 460px;
+  background: #eee;
+  border-radius: 60% / 10%;
+  transform: translateY(-180px);
+  transition: 0.8s ease-in-out;
+}
+.login label {
+  color: #573b8a;
+  transform: scale(0.6);
+}
+#chk:checked ~ .login {
+  transform: translateY(-500px);
+}
+#chk:checked ~ .login label {
+  transform: scale(1);
+}
+#chk:checked ~ .singup label {
+  transform: scale(0.6);
+}
+a {
+  text-decoration: none;
+  display: block;
+  color: #000000;
+}
+
+.me {
+  margin: 25px;
+  text-align: center;
+}
+.me a {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+  background: #010101;
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.me a:hover {
+  color: #fff;
+  background: #ffa200;
+  transition: all easy 0.3s;
+}
+
+.rowpass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.rowseeen {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+.showPassword {
+  cursor: pointer;
+  position: absolute;
+  right: 1%;
+  padding: 1rem;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.w-input {
+  padding: 15px;
+}
+signInBar,
+.signUpBar {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+}
+
+.signInButton,
+.signUpButton,
+.signInText,
+.signUpText {
+  cursor: pointer;
+}
+.signInButton,
+.signUpButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #00cc66;
+  border-radius: 50%;
+}
+@media (min-width: 1024px) {
+  .signInButton,
+  .signUpButton {
+    margin-left: 3rem;
+  }
 }

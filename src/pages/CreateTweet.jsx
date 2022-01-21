@@ -17,9 +17,7 @@ function CreateTweet({ setTweets, tweets }) {
     imgUrl: "",
     comments: [],
   });
-
-  // eslint-disable-next-line no-unused-vars
-  const { name, tweet, imgUrl } = formData;
+  const { tweet, imgUrl } = formData;
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -36,11 +34,10 @@ function CreateTweet({ setTweets, tweets }) {
             imgUrl: user.photoURL,
           });
         } else {
-          navigate("/sign-in");
+          navigate("/login");
         }
       });
     }
-
     return () => {
       isMounted.current = false;
     };

@@ -36,7 +36,7 @@ function Comment() {
         </div>
       </div>
       <CreateComment id={s} />
-      <div>
+      <div className="explore">
         {tweet.comments.length > 0 &&
           tweet.comments.map((comment) => (
             <div key={comment.id} className="comment-container">
