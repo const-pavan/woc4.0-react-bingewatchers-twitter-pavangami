@@ -137,7 +137,7 @@ function Both() {
                 src={VisibilityIcon}
                 alt="show password"
                 className="showPassword"
-                onClick={() => setShowPassword2((prev) => !prev)}
+                onClick={() => setShowPassword((prev) => !prev)}
               />
             </div>
             <button>Sing up</button>
