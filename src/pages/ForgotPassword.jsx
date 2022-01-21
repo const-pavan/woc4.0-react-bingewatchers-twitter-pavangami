@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
-import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -30,22 +29,19 @@ function ForgotPassword() {
         <form onSubmit={onSubmit}>
           <input
             type="email"
-            className="emailInput"
+            className="w-input"
             placeholder="Email"
             id="email"
             value={email}
             onChange={onChange}
           />
-          <Link className="forgotPasswordLink" to="/sign-in">
-            Sign In
-          </Link>
 
           <div className="signInBar">
-            <div className="signInText">Send Reset Link</div>
-            <button className="signInButton">
-              <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
-            </button>
+            <button className="button">Send Reset Link</button>
           </div>
+          <Link className="forgotPasswordLink" to="/login">
+            Log In
+          </Link>
         </form>
       </main>
     </div>

@@ -34,7 +34,7 @@ function CreateTweet({ setTweets, tweets }) {
             imgUrl: user.photoURL,
           });
         } else {
-          navigate("/sign-in");
+          navigate("/login");
         }
       });
     }
@@ -42,7 +42,7 @@ function CreateTweet({ setTweets, tweets }) {
       isMounted.current = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth, isMounted, navigate]);
+  }, [isMounted]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

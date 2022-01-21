@@ -52,17 +52,14 @@ function Profile() {
 
         const tweets = [];
 
-        querySnap.forEach((doc) => {
-          // console.log(doc.data().userRef);
-          // console.log(auth.currentUser.uid);
-          if (doc.data().userRef === auth.currentUser.uid)
+        querySnap.forEach(async (doc) => {
+          if (doc.data().userRef === auth.currentUser.uid) {
             return tweets.push({
               id: doc.id,
               data: doc.data(),
             });
-          else return tweets;
+          } else return tweets;
         });
-
         setTweets(tweets);
         setLoading(false);
       } catch (error) {
@@ -81,7 +78,7 @@ function Profile() {
   const { name } = formData;
   const onLogOut = () => {
     auth.signOut();
-    navigate("/");
+    navigate("/login");
   };
 
   const onSubmit = async () => {
@@ -101,6 +98,33 @@ function Profile() {
     } catch (error) {
       toast.error("Could not update, Try again..!");
     }
+    const fetchTweets = async () => {
+      try {
+        const tweetsRef = collection(db, "tweets"); //reference
+        //create query
+        const q = query(tweetsRef, orderBy("timestamp", "desc"));
+        const querySnap = await getDocs(q);
+
+        querySnap.forEach(async (cdoc) => {
+          if (cdoc.data().userRef === auth.currentUser.uid) {
+            try {
+              const docRef = doc(db, "tweets", `${cdoc.id}`);
+              //console.log(docRef.name);
+              // eslint-disable-next-line no-unused-vars
+              const updateName = await updateDoc(docRef, {
+                name,
+              });
+            } catch (error) {
+              toast.error("Try again..!");
+            }
+          }
+        });
+      } catch (error) {
+        toast.error("Try again..!");
+      }
+    };
+    fetchTweets();
+    toast.success("Refresh the page..!");
   };
 
   const onChange = (e) => {
@@ -152,11 +176,8 @@ function Profile() {
               reject(error);
             },
             () => {
-              // Handle successful uploads on complete
-              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
               getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 imgUrl = downloadURL;
-                //console.log("File available at", downloadURL);
                 resolve(downloadURL);
               });
             }
@@ -172,20 +193,43 @@ function Profile() {
         toast.error("Images not uploaded");
         return;
       });
-      //console.log("File available at", imgUrls);
       try {
         //update in db
         await updateProfile(auth.currentUser, {
           photoURL: imgUrl,
         });
-        //console.log(auth.currentUser);
         //update in firestore
         const userRef = doc(db, "users", auth.currentUser.uid);
         await updateDoc(userRef, {
           imgUrl: imgUrl,
         });
+
+        const fetchTweets = async () => {
+          try {
+            const tweetsRef = collection(db, "tweets"); //reference
+            //create query
+            const q = query(tweetsRef, orderBy("timestamp", "desc"));
+            const querySnap = await getDocs(q);
+
+            querySnap.forEach(async (cdoc) => {
+              if (cdoc.data().userRef === auth.currentUser.uid) {
+                try {
+                  const docRef = doc(db, "tweets", `${cdoc.id}`);
+                  // eslint-disable-next-line no-unused-vars
+                  const updateImgUrl = await updateDoc(docRef, {
+                    imgUrl: imgUrl,
+                  });
+                } catch (error) {
+                  toast.error("Try again..!");
+                }
+              }
+            });
+          } catch (error) {
+            toast.error("Try again..!");
+          }
+        };
+        fetchTweets();
       } catch (error) {
-        console.log(error);
         toast.error("Could not update, Try again..!");
       }
       setLoading(false);
@@ -213,7 +257,7 @@ function Profile() {
         />
 
         <div className="profileDetailsHeader">
-          <p className="profileDetailsText">Personal Details</p>
+          <p className="profileDetailsText">Update Name</p>
           <p
             className="changePersonalDetails"
             onClick={() => {
@@ -236,23 +280,20 @@ function Profile() {
             />
           </form>
         </div>
-        <label className="formLabel">Profile Image</label>
-        <div className="name-container">
-          <form>
-            <input
-              className="formInputFile"
-              type="file"
-              id="images"
-              max="1"
-              accept=".jpg,.png,.jpeg"
-              onChange={onMutate}
-              required
-            />
-            <button type="submit" className="logOut" onClick={onSubmitt}>
-              Update Profile
-            </button>
-          </form>
-        </div>
+        <form>
+          <input
+            className="formInputFile"
+            type="file"
+            id="images"
+            max="1"
+            accept=".jpg,.png,.jpeg"
+            onChange={onMutate}
+            required
+          />
+          <button type="submit" className="logOut" onClick={onSubmitt}>
+            Update Profile
+          </button>
+        </form>
 
         <Tweets setTweets={setTweets} tweets={tweets} loading={loading} />
       </main>

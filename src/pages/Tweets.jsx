@@ -45,7 +45,7 @@ function Dialog(props) {
 
 function Tweets({ setTweets, tweets, loading }) {
   return (
-    <div>
+    <div className="">
       {loading ? (
         <Spinner />
       ) : tweets && tweets.length > 0 ? (
@@ -68,6 +68,7 @@ function Tweets({ setTweets, tweets, loading }) {
       ) : (
         <p>No Tweets Yet</p>
       )}
+      <div className="marginB"></div>
     </div>
   );
 }
