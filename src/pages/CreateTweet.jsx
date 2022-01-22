@@ -109,21 +109,21 @@ function CreateTweet({ setTweets, tweets }) {
       <div className="tweet-container">
         <img src={imgUrl} alt="profile" className="img"></img>
 
-        <div className="text-cotainer">
-          <strong></strong>
+        <div className="cr">
+          <form onSubmit={onSubmit}>
+            <textarea
+              className="textarea"
+              type="text"
+              id="address"
+              value={tweet}
+              placeholder="type your tweet..."
+              onChange={onMutate}
+              required
+            />
+
+            <button className="submitbutton">Tweet</button>
+          </form>
         </div>
-        <form onSubmit={onSubmit}>
-          <textarea
-            className="textarea"
-            type="text"
-            id="address"
-            value={tweet}
-            placeholder="type your tweet..."
-            onChange={onMutate}
-            required
-          />
-          <input type="submit" value="Tweet" className="tweet" />
-        </form>
       </div>
     </>
   );

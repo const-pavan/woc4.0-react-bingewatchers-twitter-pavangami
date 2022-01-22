@@ -83,12 +83,12 @@ function CreateComment({ id }) {
     return <Spinner />;
   }
   return (
-    <main>
-      <div>
-        <div className="tweet-container">
-          <div className="text-cotainer">
-            <strong></strong>
-          </div>
+    <div>
+      <div className="tweet-container">
+        <div className="text-cotainer">
+          <strong></strong>
+        </div>
+        <div className="cr">
           <form onSubmit={onSubmit}>
             <input
               type="text"
@@ -99,11 +99,12 @@ function CreateComment({ id }) {
               onChange={onMutate}
               required
             />
-            <input type="submit" value="Submit" />
+
+            <button className="submitbutton">Comment</button>
           </form>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

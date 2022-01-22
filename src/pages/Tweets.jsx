@@ -1,9 +1,16 @@
 import Spinner from "../components/Spinner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import comment from "../assets/jpg/comment.jpg";
+import { FaTimes } from "react-icons/fa";
+import { getAuth } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase.config";
+import { toast } from "react-toastify";
 function Dialog(props) {
-  // const auth = getAuth();
+  const auth = getAuth();
   // let imgUrl= null;
+  const navigate = useNavigate();
+  const isOwn = props.isOwn;
   const date = props.timestamp.toDate();
   const id = props.id;
   const userID = props.useId;
@@ -19,6 +26,17 @@ function Dialog(props) {
     date.getMinutes() +
     ":" +
     date.getSeconds();
+
+  const onDelete = async () => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      try {
+        await deleteDoc(doc(db, "tweets", `${id}`));
+        navigate("/profile");
+      } catch (error) {
+        toast.error("Try again...!");
+      }
+    }
+  };
   return (
     <div className="tweet-container">
       <img src={props.img} alt="profile" className="img"></img>
@@ -30,6 +48,14 @@ function Dialog(props) {
         </div>
 
         <div className="commentime-container">
+          {/* {console.log(userID)}
+          {console.log(auth.currentUser.uid)} */}
+          {!isOwn && userID === auth.currentUser.uid ? (
+            <FaTimes color="purple" onClick={onDelete} />
+          ) : (
+            <div className="count"></div>
+          )}
+
           <Link to={`/comments/${id}`}>
             <div className="navbarListItems">
               <img src={comment} alt="comment" className="comment-icon"></img>
@@ -43,7 +69,7 @@ function Dialog(props) {
   );
 }
 
-function Tweets({ setTweets, tweets, loading }) {
+function Tweets({ setTweets, tweets, loading, isOwn }) {
   return (
     <div className="">
       {loading ? (
@@ -61,12 +87,13 @@ function Tweets({ setTweets, tweets, loading }) {
                 timestamp={tweet.data.timestamp}
                 comments={tweet.data.comments}
                 useId={tweet.data.userRef}
+                isOwn={isOwn}
               />
             ))}
           </div>
         </>
       ) : (
-        <p>No Tweets Yet</p>
+        <h2>No Tweets Yet</h2>
       )}
       <div className="marginB"></div>
     </div>

@@ -140,7 +140,7 @@ function Both() {
                 onClick={() => setShowPassword((prev) => !prev)}
               />
             </div>
-            <button>Sing up</button>
+            <button className="button">Sing up</button>
           </form>
         </div>
         <div className="login">
@@ -176,7 +176,7 @@ function Both() {
               Forgot Password
             </Link>
 
-            <button>Login</button>
+            <button className="button">Login</button>
           </form>
         </div>
       </div>

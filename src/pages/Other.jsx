@@ -136,18 +136,20 @@ function Other() {
       <header>
         <h1>User Profile</h1>
       </header>
-      <main>
-        <UserProfile
-          imgUrl={user.imgUrl}
-          onFollowClick={onFollowClick}
-          name={user.name}
-          following={following}
-          followingCount={followingCount}
-          followerCount={followerCount}
-          isOwn={true}
-        />
-        <Tweets setTweets={setTweets} tweets={tweets} />
-      </main>
+      <div className="profile">
+        <main>
+          <UserProfile
+            imgUrl={user.imgUrl}
+            onFollowClick={onFollowClick}
+            name={user.name}
+            following={following}
+            followingCount={followingCount}
+            followerCount={followerCount}
+            isOwn={true}
+          />
+          <Tweets setTweets={setTweets} tweets={tweets} />
+        </main>
+      </div>
     </>
   ) : (
     <div>Loading...</div>

@@ -15,49 +15,64 @@ body {
   font-family: sans-serif;
   /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
   background: #e1eec3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f05053, #e1eec3);
+  background: linear-gradient(to left, #f05053, #e1eec3);
+}
+.navbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 85px;
+  /* background-color: #ffffff; */
+  background: #e1eec3; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left,
     #f05053,
     #e1eec3
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #f05053, #e1eec3);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p-container {
+  width: auto;
+  height: auto;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(50, 120, 80, 0.2);
+  background: linear-gradient(to right, #f05053, #e1eec3);
 }
 
 input[type="submit"] {
   all: unset;
+  padding: 5px, 5px;
   margin-left: 10px;
   background-color: rgb(62, 87, 197);
   border-radius: 2px;
   border: none;
   font-size: 20px;
   border-radius: 5px;
-  /* padding: 5px, 5px; */
 }
 .follow {
   all: unset;
   margin-left: 10px;
-  background-color: rgb(62, 87, 197);
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
   border-radius: 2px;
   border: none;
   font-size: 20px;
   border-radius: 5px;
   padding: 5px;
 }
-.textarea {
-  all: unset;
-  width: 50vw;
-  height: auto;
-  min-height: auto;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  font-size: 16px;
-  line-height: 1.5;
-  box-shadow: 1px 1px 1px #999;
-  padding: 10px 10px;
-}
 
+.cr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
+}
 .namecomment {
   all: unset;
   width: 50vw;
@@ -68,9 +83,6 @@ input[type="submit"] {
   background-color: #f8f8f8;
   font-size: 16px;
 }
-.tweet {
-  padding: 10px, 10px;
-}
 
 .primaryButton {
   cursor: pointer;
@@ -80,11 +92,8 @@ input[type="submit"] {
   color: #ffffff;
   font-weight: 600;
   font-size: 1.25rem;
-  width: 80%;
+  width: 30%;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .removeIcon {
@@ -146,31 +155,6 @@ input[type="submit"] {
   }
 }
 
-.pageHeader {
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.navbar {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 85px;
-  /* background-color: #ffffff; */
-  background: #e1eec3; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #f05053,
-    #e1eec3
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #f05053, #e1eec3);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .navbarNav {
   width: 100%;
   margin-top: 0.75rem;
@@ -224,62 +208,6 @@ input[type="submit"] {
   .explore {
     margin-bottom: 10rem;
   }
-}
-
-.exploreHeading,
-.exploreCategoryHeading {
-  font-weight: 700;
-}
-
-.exploreCategoryHeading {
-  margin-top: 3rem;
-}
-
-.exploreCategories {
-  display: flex;
-  justify-content: space-between;
-}
-.exploreCategories a {
-  width: 48%;
-}
-
-.exploreCategoryImg {
-  min-height: 115px;
-  height: 15vw;
-  width: 100%;
-  border-radius: 1.5rem;
-  object-fit: cover;
-  margin: 0 auto;
-}
-
-.exploreCategoryName {
-  font-weight: 500;
-  text-align: left;
-}
-
-.profile {
-  width: 70vw;
-  margin-bottom: 1rem;
-}
-.marginB {
-  margin-bottom: 10rem;
-}
-.profileHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: auto;
-}
-
-.logOut {
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #00cc66;
-  width: 15rem;
-  border-radius: 1rem;
 }
 
 .profileDetailsHeader {
@@ -425,6 +353,7 @@ input[type="submit"] {
   padding: 10px;
   margin: 10px;
 }
+
 .tt-container {
   width: 100%;
   display: flex;
@@ -451,9 +380,9 @@ input[type="submit"] {
   width: auto;
   display: flex;
   margin: 5px;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: space-between;
 }
 .count {
   padding: 3px;
@@ -479,14 +408,7 @@ input[type="submit"] {
   margin: 10px;
 }
 /* Profile Section */
-.p-container {
-  width: auto;
-  height: auto;
-  justify-content: center;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(50, 120, 80, 0.2);
-  background: rgb(192, 180, 180);
-}
+
 .name-container {
   display: flex;
   flex-direction: row;
@@ -512,9 +434,7 @@ input[type="submit"] {
   font-size: 2.2rem;
   font-weight: 300;
 }
-.p-margin {
-  padding: 20px;
-}
+
 .formfile {
   padding: 0.9rem 3rem;
   background-color: #ffffff;
@@ -531,16 +451,9 @@ input[type="submit"] {
   flex-direction: row;
   justify-content: flex-start;
 }
-
-.logOut {
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #00cc66;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
+.count20 {
+  padding: 20px;
+  margin: 20px;
 }
 /*login */
 
@@ -594,7 +507,20 @@ input {
   outline: none;
   border-radius: 5px;
 }
-button {
+.textarea {
+  width: 60vw;
+  height: auto;
+  min-height: auto;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  line-height: 1.5;
+  box-shadow: 1px 1px 1px #999;
+  padding: 10px 10px;
+}
+.button {
   width: 60%;
   height: 40px;
   margin: 10px auto;
@@ -602,6 +528,23 @@ button {
   display: block;
   color: #fff;
   background: #573b8a;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+.ubutton {
+  width: 30%;
+  height: 40px;
+  margin: 10px auto;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
   font-size: 1em;
   font-weight: bold;
   margin-top: 20px;
@@ -619,6 +562,54 @@ button:hover {
   color: #6d44b8;
   font-weight: 600;
   text-align: center;
+}
+.submitbutton {
+  margin: 10px auto;
+  margin-left: 5px;
+  justify-content: center;
+  padding: 5px;
+  color: #fff;
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+
+.profile {
+  width: 70vw;
+  margin-bottom: 1rem;
+}
+.marginB {
+  margin-bottom: 10rem;
+}
+.pageHeader {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70vw;
+  flex-direction: row;
+}
+
+.logOut {
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+  padding: 5px;
+  width: 15rem;
+  border-radius: 1rem;
+  justify-content: end;
 }
 .login {
   height: 460px;
@@ -682,11 +673,11 @@ a {
   position: absolute;
   right: 1%;
   padding: 1rem;
-  margin-top: 5px;
+  margin-top: 12px;
   margin-left: 5px;
 }
 .w-input {
-  padding: 15px;
+  padding: 20px;
 }
 signInBar,
 .signUpBar {

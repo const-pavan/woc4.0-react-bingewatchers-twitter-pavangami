@@ -46,7 +46,12 @@ function Explore() {
       </header>
       <main>
         <CreateTweet setTweets={setTweets} tweets={tweets} />
-        <Tweets setTweets={setTweets} tweets={tweets} loading={loading} />
+        <Tweets
+          setTweets={setTweets}
+          tweets={tweets}
+          loading={loading}
+          isOwn={false}
+        />
       </main>
     </div>
   );

@@ -257,7 +257,7 @@ function Profile() {
         />
 
         <div className="profileDetailsHeader">
-          <p className="profileDetailsText">Update Name</p>
+          <strong className="profileDetailsText">Update Name</strong>
           <p
             className="changePersonalDetails"
             onClick={() => {
@@ -290,12 +290,17 @@ function Profile() {
             onChange={onMutate}
             required
           />
-          <button type="submit" className="logOut" onClick={onSubmitt}>
+          <button type="submit" className="ubutton" onClick={onSubmitt}>
             Update Profile
           </button>
         </form>
 
-        <Tweets setTweets={setTweets} tweets={tweets} loading={loading} />
+        <Tweets
+          setTweets={setTweets}
+          tweets={tweets}
+          loading={loading}
+          isOwn={true}
+        />
       </main>
     </div>
   ) : (
