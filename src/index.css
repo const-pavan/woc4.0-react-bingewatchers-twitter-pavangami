@@ -11,7 +11,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 90vh;
   font-family: sans-serif;
   /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
   background: #e1eec3; /* fallback for old browsers */
