@@ -12,6 +12,7 @@ import Comment from "./pages/Comment";
 import Other from "./pages/Other";
 import PrivateRouteOther from "./components/PrivateRouteOther";
 import Both from "./pages/Both";
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
           {/* <Route path="/" element={} /> */}
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/" element={<Explore />} />
+          </Route>
+          <Route path="/user" element={<PrivateRoute />}>
+            <Route path="/user" element={<Users />} />
           </Route>
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />

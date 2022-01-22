@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function UserProfile({
   imgUrl,
   onFollowClick,
@@ -6,6 +7,8 @@ function UserProfile({
   followingCount,
   followerCount,
   isOwn,
+  isall,
+  userID,
 }) {
   return (
     <div className="p-container">
@@ -15,7 +18,14 @@ function UserProfile({
 
           <div className="col-container">
             <div className="name-container">
-              <h1 className="profileaa-user-name">{name}</h1>
+              {isall ? (
+                <Link to={`/other/${userID}`}>
+                  {<h1 className="profileaa-user-name">@{name}</h1>}
+                </Link>
+              ) : (
+                <h1 className="profileaa-user-name">{name}</h1>
+              )}
+
               <div className="count2"></div>
               <div className="count2"></div>
               {isOwn && (

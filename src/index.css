@@ -374,6 +374,8 @@ input[type="submit"] {
   border-radius: 50%;
   height: 100px;
   width: 100px;
+  object-fit: cover; /* Do not scale the image */
+  object-position: center;
   display: block;
 }
 .commentime-container {
